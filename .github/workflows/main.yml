@@ -1,4 +1,8 @@
-...
+name: ec2-deploy
+on:
+  push:
+    branches:
+      - 'main'
 jobs:
   deploy:
     runs-on: ubuntu-latest
