@@ -19,7 +19,7 @@ jobs:
         run: |
               echo "${{ secrets.DEPLOY_KEY }}" > deploy_key.pem
               chmod 400 deploy_key.pem
-              ssh -i deploy_key.pem ubuntu@ec2-3-87-27-112.compute-1.amazonaws.com 'sh script.sh'
+              ssh -t -i deploy_key.pem ubuntu@ec2-3-87-27-112.compute-1.amazonaws.com 'sh script.sh'
         #env:
          # AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
          # AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
