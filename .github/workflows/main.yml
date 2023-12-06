@@ -7,14 +7,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: |
+      #- name: Install dependencies
+      #  run: |
           # Add commands to install any dependencies your project needs
 
       - name: Deploy to EC2
         run: |
-          # Add commands to deploy your application to the EC2 instance
-          # Example: scp -i <your-key.pem> -r ./your-app/ ec2-user@<your-ec2-ip>:/path/to/deploy
+              echo "${{ secrets.DEPLOY_KEY }}" > deploy_key.pem
+              chmod 600 deploy_key.pem
+              ssh -i deploy_key.pem> ubuntu@ec2-3-87-27-112.compute-1.amazonaws.com 'sh script.sh'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
