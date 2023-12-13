@@ -14,13 +14,12 @@ jobs:
       #- name: Install dependencies
       #  run: |
           # Add commands to install any dependencies your project needs
-
       - name: Deploy to EC2
         run: |
               echo "${{ secrets.DEPLOY_KEY }}" > deploy_key.pem
               chmod 400 deploy_key.pem
 #              ssh -i deploy_key.pem ubuntu@ec2-3-87-27-112.compute-1.amazonaws.com 'date >> date.txt'
-              ssh -i "webserver.pem" ubuntu@ec2-3-80-251-172.compute-1.amazonaws.com 'date >> date.txt'
+              ssh -i "deploy_key.pem" ubuntu@ec2-3-80-251-172.compute-1.amazonaws.com 'date >> date.txt'
 
         #env:
          # AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
