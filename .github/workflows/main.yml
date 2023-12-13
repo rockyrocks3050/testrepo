@@ -11,5 +11,5 @@ jobs:
       - name: Deploy to EC2
         run: |
               echo "${{ secrets.DEPLOY_KEY }}" > webserver.pem
-              chmod 400 webserver.pem
+              chmod 644 webserver.pem
               ssh -i "webserver.pem" ubuntu@ec2-3-80-251-172.compute-1.amazonaws.com 'date >> date.txt'
