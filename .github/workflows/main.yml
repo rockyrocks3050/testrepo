@@ -1,4 +1,4 @@
-name: ec2-deploy
+name: ec2-deploy-testrepo
 on: push
 jobs:
   deploy:
@@ -6,15 +6,13 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Deploy to EC2
-        run: |
-              echo "${{ secrets.DEPLOY_KEY }}" > webserver.pem
-              chmod 400 webserver.pem
-              ssh -o StrictHostKeyChecking=accept-new -i "webserver.pem" ubuntu@ec2-3-80-251-172.compute-1.amazonaws.com \
-              'date >> date.txt && \
-              cd testrepo/ && \
-              git pull origin main && \
-              cd .. && \
-              echo "Done" >> date.txt'
+        uses: appleboy/ssh-action@master
+        with:
+          host: ec2-3-80-251-172.compute-1.amazonaws.com
+          username: ubuntu
+          key: ${{ secrets.DEPLOY_KEY }}
+          port: 22
+          script: |
+            sudo apt -y update
+            sudo apt install -y docker
+            echo docker-installed >> docker-installed.txt
