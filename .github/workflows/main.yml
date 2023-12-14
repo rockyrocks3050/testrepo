@@ -13,11 +13,5 @@ jobs:
           key: ${{ secrets.DEPLOY_KEY }}
           port: 22
           script: |
-            sudo apt -y update
-            sudo apt install -y docker.io
-            sudo groupadd docker
-            # add user to docker group
-            sudo usermod -aG docker $USER
-            newgrp docker
             docker run hello-world
-            echo docker-installed >> docker-installed-dobara.txt
+            echo docker-installed >> docker-installed-ek-wari-fer.txt
