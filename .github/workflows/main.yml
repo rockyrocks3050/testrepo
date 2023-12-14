@@ -16,4 +16,5 @@ jobs:
               'date >> date.txt && \
               cd testrepo/ && \
               git pull origin main && \
+              cd .. && \
               echo "Done" >> date.txt'
